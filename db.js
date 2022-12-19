@@ -32,22 +32,25 @@ const createNewAccount = ({ id, acc_name, acc_balance }) => {
       console.log(`❌ Problem in Creating an Account`)
       console.log(error)
     } else {
-      console.log(`✔️  New Customer created Successfully`)
-      console.log(res)
+      console.log(`Your Account has been Created Successfully. \n
+      Your Account Details are following: \n
+      - Account ID: ${id}, \n
+      - Account Name: ${acc_name}, \n
+      - Account Balance: ${acc_balance}`)
     }
   })
 }
 
 const withdrawMoney = ({ id, amount }) => {
   client.query(`SELECT acc_balance FROM account WHERE id = $1`, [id], (error, res) => {
-    const balance = parseFloat( res.rows[0].acc_balance )
+    const balance = parseFloat(res.rows[0].acc_balance)
     console.log(`Your Existing Balance is ${balance}`)
     console.log(`typeof balance is  ${typeof balance}`)
 
     const newBalance = balance - amount
 
     client.query(`UPDATE account SET acc_balance = $1 WHERE id = $2`, [newBalance, id], (error, res) => {
-      if(error) console.log(`❌  Problem withDrawing Money`)
+      if (error) console.log(`❌  Problem withDrawing Money`)
       else console.log(`✔️  Amount ${amount} withdrawn Successfully. Your New Balance is ${newBalance}`)
       console.log(res)
     })
@@ -56,29 +59,30 @@ const withdrawMoney = ({ id, amount }) => {
 
 const depositMoney = ({ id, amount }) => {
   client.query(`SELECT acc_balance FROM account WHERE id = $1`, [id], (error, res) => {
-    const balance = parseFloat( res.rows[0].acc_balance )
+    const balance = parseFloat(res.rows[0].acc_balance)
     console.log(`Your Existing Balance is ${balance}`)
 
     const newBalance = balance + amount
 
     client.query(`UPDATE account SET acc_balance = $1 WHERE id = $2`, [newBalance, id], (error, res) => {
-      if(error) console.log(`❌  Problem depositing Money`)
+      if (error) console.log(`❌  Problem depositing Money`)
       else console.log(`✔️  Amount ${amount} deposited Successfully. Your New Balance is ${newBalance}`)
       console.log(res)
     })
   })
 }
 
-const transferMoney = ({id, recieverId, amount}) => {
-  withdrawMoney({id: id, amount})
-  depositMoney({id: recieverId, amount})
+const transferMoney = ({ id, recieverId, amount }) => {
+  withdrawMoney({ id: id, amount })
+  depositMoney({ id: recieverId, amount })
 }
 
-const accountBalance = ({id}) => {
+const accountBalance = ({ id }) => {
   client.query(`SELECT acc_balance FROM account WHERE id = $1`, [id], (error, res) => {
-    if(error) console.log(`❌  Problem withDrawing Money`)
-    else {const balance = parseFloat( res.rows[0].acc_balance )
-    console.log(`Your Account Balance is ${balance}`)
+    if (error) console.log(`❌  Problem withDrawing Money`)
+    else {
+      const balance = parseFloat(res.rows[0].acc_balance)
+      console.log(`Your Account Balance is ${balance}`)
     }
   })
 }
@@ -87,8 +91,7 @@ const accountBalance = ({id}) => {
 // withdrawMoney({ id: 2, amount: 10 })
 // depositMoney({ id: 3, amount: 10 })
 // transferMoney({id: 3, recieverId: 4, amount: 10})
-
-accountBalance({id: 3})
+// accountBalance({ id: 3 })
 
 module.exports = {
   createNewAccount,
