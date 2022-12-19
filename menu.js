@@ -47,7 +47,7 @@ const start = async () => {
 
       withdrawMoney({ id: accountId, amount: balanceToAdd })
 
-      
+
     } else if (choice == 3) {
       console.log(`\n ✔️ Please Withdraw Money`)
 
@@ -70,7 +70,7 @@ const start = async () => {
       const recieverId = parseInt(await input("\n ✔️ Please select Account ID of Reciever's Account"))
       const amountToTransfer = parseInt(await input("\n ✔️ Please tell the Amount to transfer"))
 
-      transferMoney({id: myAccountId, recieverId: recieverId, amount: amountToTransfer})
+      transferMoney({ id: myAccountId, recieverId: recieverId, amount: amountToTransfer })
 
     } else {
       console.log(`Bye Bye`)
