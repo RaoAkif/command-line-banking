@@ -13,19 +13,17 @@ console.log("\n 4. Check Balance")
 console.log("\n 5. Transfer Money")
 console.log("\n 6. Exit")
 
-const input = () => {
-  return new Promise((resolve, reject) => {
-    rl.question('\n 👉Enter Your Choice: ', (ch) => {
-      resolve(ch)
-    })
+const input = () => new Promise((resolve, reject) => {
+  rl.question('\n 👉Enter Your Choice: ', (choice) => {
+    resolve(choice)
   })
-}
+})
 
 const start = async () => {
-  while(true) {
+  while (true) {
     const choice = await input()
 
-    if(choice == 1) {
+    if (choice == 1) {
       console.log(`\n ✔️ Please Create a new Account`)
     } else if (choice == 2) {
       console.log(`\n ✔️ Please Deposit Money`)
