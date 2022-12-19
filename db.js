@@ -76,8 +76,10 @@ const transferMoney = ({id, recieverId, amount}) => {
 
 const accountBalance = ({id}) => {
   client.query(`SELECT acc_balance FROM account WHERE id = $1`, [id], (error, res) => {
-    const balance = parseFloat( res.rows[0].acc_balance )
+    if(error) console.log(`❌  Problem withDrawing Money`)
+    else {const balance = parseFloat( res.rows[0].acc_balance )
     console.log(`Your Account Balance is ${balance}`)
+    }
   })
 }
 
