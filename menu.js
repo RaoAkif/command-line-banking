@@ -14,8 +14,8 @@ const rl = readline.createInterface({
 
 console.log("😃Welcome To Banking Application😃");
 console.log("\n 1. Create new account")
-console.log("\n 2. Deposit Money")
-console.log("\n 3. Withdraw Money")
+console.log("\n 2. Withdraw Money")
+console.log("\n 3. Deposit Money")
 console.log("\n 4. Check Balance")
 console.log("\n 5. Transfer Money")
 console.log("\n 6. Exit")
